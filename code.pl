@@ -69,6 +69,26 @@ connected(wadi_hof,helwan_university).
 connected(helwan_university,ain_helwan).
 connected(ain_helwan,helwan).
 %second line
+line2(shobra_elkheima).
+line2(koliet_elzeraa).
+line2(mezallat).
+line2(khalafawy).
+line2(sainte_teresa).
+line2(road_elfarag).
+line2(massara).
+line2(alshohadaa).
+line2(ataba).
+line2(naguib).
+line2(sadat).
+line2(opera).
+line2(dokki).
+line2(bohooth).
+line2(cairo_university).
+line2(faisal).
+line2(giza).
+line2(omm_elmisryeen).
+line2(sakiat_mekki).
+line2(elmounib).
 connected(shobra_elkheima,koliet_elzeraa).
 connected(koliet_elzeraa,mezallat).
 connected(mezallat,khalafawy).
