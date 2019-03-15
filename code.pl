@@ -158,3 +158,18 @@ countNeighbors(Station, Count) :-
     neighbors(Station, StationList),
     listCount(StationList, Count).
 %end of task2
+
+%Task3
+cost(Source,Destination,Cost):-
+    line1(Source),line1(Destination),
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N@=<7,
+    Cost = '3 EGP'.
+   
+cost(Source,Destination,Cost):-
+    line2(Source),line2(Destination),
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N@=<7,
+    Cost = '3 EGP'.
