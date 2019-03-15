@@ -173,3 +173,10 @@ cost(Source,Destination,Cost):-
     listCount(L,N),
     N@=<7,
     Cost = '3 EGP'.
+
+cost(Source,Destination,Cost):-
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N@>=16,
+    Cost = '7 EGP'.
+%end of task3
