@@ -70,17 +70,23 @@ path(S,D,N,[[S,H]|T]):-
 %end of task1
 
 %Task2
-%append( *List1, *List2, *List3), 
-%where List3 is the result of appending List1 then List2
-append([], L, L).
-append([H|T], L2, [H|NT]):-
-	append(T, L2, NT).
-% neighbor(Station, StationList)
-% StationList is bound to a list of the neighbor Stations of Station.
-neighbor(Station, StationList) :-
-    findall(Neighbor, connected(Station,Neighbor), RightList),
-	findall(Neighbor, connected(Neighbor,Station), LiftList),
-    append(RightList,LiftList,StationList).
+% In neighbors/2:
+% StationList is bound to a list of the neighbor Stations of a given Station.
+neighbors(Station, StationList) :-
+    neighbors(Station, [], StationList).
+
+%neighbors/3 tries to collect Neighbors as long as we haven't 
+%seen them before (hence the \+ member check), and returns the 
+%list where no new Neighbors accumulated into the L list can be found.
+neighbors(Station, L, StationList) :-
+    connected(Neighbor,Station),
+    \+ member(Neighbor, L), !,
+	neighbors(Station, [Neighbor|L], StationList);
+    connected(Station,Neighbor),
+    \+ member(Neighbor, L), !,
+	neighbors(Station, [Neighbor|L], StationList).
+
+neighbors(_, L, L).
     
 % listCount(List, Count)
 % Count is bound to the number of elements in List.
@@ -92,6 +98,6 @@ listCount([_|Tail], Count) :-
 % countNeighbors(Station, Count)
 % Count is bound to the number of neighbor stations of Station.
 countNeighbors(Station, Count) :-
-    neighbor(Station, StationList),
+    neighbors(Station, StationList),
     listCount(StationList, Count).
 %end of task2
