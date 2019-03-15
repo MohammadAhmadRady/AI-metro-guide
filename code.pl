@@ -1,4 +1,61 @@
-%first line
+%first line stations
+line1(new_elmarg).
+line1(elmarg).
+line1(ezbet_elnakhl).
+line1(ain_shams).
+line1(elmatareyya).
+line1(helmeyet_elzaitoun).
+line1(hadayeq_elzaitoun).
+line1(saray_elqobba).
+line1(hammamat_elqobba).
+line1(kobri_elqobba).
+line1(manshiet_elsadr).
+line1(eldemerdash).
+line1(ghamra).
+line1(alshohadaa).
+line1(urabi).
+line1(nasser).
+line1(sadat).
+line1(saad_zaghloul).
+line1(alsayyeda_zeinab).
+line1(elmalek_elsaleh).
+line1(margirgis).
+line1(elzahraa).
+line1(dar_elsalam).
+line1(hadayeq_elmaadi).
+line1(maadi).
+line1(thakanat_elmaadi).
+line1(tora_elbalad).
+line1(kozzika).
+line1(tora_elasmant).
+line1(elmaasara).
+line1(hadayeq_helwan).
+line1(wadi_hof).
+line1(helwan_university).
+line1(ain_helwan).
+line1(helwan).
+%second line stations
+line2(shobra_elkheima).
+line2(koliet_elzeraa).
+line2(mezallat).
+line2(khalafawy).
+line2(sainte_teresa).
+line2(road_elfarag).
+line2(massara).
+line2(alshohadaa).
+line2(ataba).
+line2(naguib).
+line2(sadat).
+line2(opera).
+line2(dokki).
+line2(bohooth).
+line2(cairo_university).
+line2(faisal).
+line2(giza).
+line2(omm_elmisryeen).
+line2(sakiat_mekki).
+line2(elmounib).
+%first line connection
 connected(new_elmarg,elmarg).
 connected(elmarg,ezbet_elnakhl).
 connected(ezbet_elnakhl,ain_shams).
@@ -33,7 +90,7 @@ connected(hadayeq_helwan,wadi_hof).
 connected(wadi_hof,helwan_university).
 connected(helwan_university,ain_helwan).
 connected(ain_helwan,helwan).
-%second line
+%second line connection
 connected(shobra_elkheima,koliet_elzeraa).
 connected(koliet_elzeraa,mezallat).
 connected(mezallat,khalafawy).
@@ -101,3 +158,40 @@ countNeighbors(Station, Count) :-
     neighbors(Station, StationList),
     listCount(StationList, Count).
 %end of task2
+
+%Task3
+cost(Source,Destination,Cost):-
+    line1(Source),line1(Destination),
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N@=<7,
+    Cost = '3 EGP'.
+   
+cost(Source,Destination,Cost):-
+    line2(Source),line2(Destination),
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N@=<7,
+    Cost = '3 EGP'.
+
+cost(Source,Destination,Cost):-
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N<16,
+    N>7,
+    Cost = '5 EGP'.
+
+cost(Source,Destination,Cost):-
+    line1(Source),line2(Destination),
+    Cost = '5 EGP'.
+
+cost(Source,Destination,Cost):-
+    line2(Source),line1(Destination),
+    Cost = '5 EGP'.
+
+cost(Source,Destination,Cost):-
+    path(Source, Destination,any,L),
+    listCount(L,N),
+    N@>=16,
+    Cost = '7 EGP'.
+%end of task3
