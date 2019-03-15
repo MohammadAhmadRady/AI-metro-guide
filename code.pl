@@ -177,6 +177,21 @@ cost(Source,Destination,Cost):-
 cost(Source,Destination,Cost):-
     path(Source, Destination,any,L),
     listCount(L,N),
+    N<16,
+    N>7,
+    Cost = '5 EGP'.
+
+cost(Source,Destination,Cost):-
+    line1(Source),line2(Destination),
+    Cost = '5 EGP'.
+
+cost(Source,Destination,Cost):-
+    line2(Source),line1(Destination),
+    Cost = '5 EGP'.
+
+cost(Source,Destination,Cost):-
+    path(Source, Destination,any,L),
+    listCount(L,N),
     N@>=16,
     Cost = '7 EGP'.
 %end of task3
