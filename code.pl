@@ -112,18 +112,23 @@ connected(omm_elmisryeen,sakiat_mekki).
 connected(sakiat_mekki,elmounib).
 
 %task1
-path(S, D,any,[[S,D]]) :-
-    connected(S, D).
-path(S,D,any,[[S,H]|T]):-
-   connected(S,H),
-    path(H,D,any,T).
+path(Source, Destination, any, [[Source, Destination]]) :-
+    connected(Source, Destination).
+path(Source, Destination, any, [[Source, H]|T]):-
+   connected(Source, H),
+    path(H, Destination, any, T), !.
+path(Destination, Source, any, [[Source, H]|T]):-
+   connected(Source, H),
+    path(H, Destination, any, T), !.
 
-path(S, D,N,[[S,D]]) :-
-  N\=any , N>0,connected(S, D).
-path(S,D,N,[[S,H]|T]):-
-  N\=any,N>0, connected(S,H)
-    ,NN is N-1,
-    path(H,D,NN,T).
+path(Source, Destination, N, [[Source,Destination]]) :-
+  N\=any, N>0, connected(Source, Destination).
+path(Source, Destination, N, [[Source,H]|T]):-
+  N\=any, N>0, connected(Source, H),
+  NN is N-1, path(H, Destination, NN, T),!.
+path(Destination, Source, N, [[Source,H]|T]):-
+  N\=any, N>0, connected(Source, H),
+  NN is N-1, path(H, Destination, NN, T),!.
 %end of task1
 
 %Task2
